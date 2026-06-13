@@ -45,6 +45,7 @@ The recommendation process is divided into three main stages:
 smart-eyeglasses-kbs/
   src/
     app.py
+    cli_app.py
     confidence_engine.py
     config.py
     face_analyzer.py
@@ -59,9 +60,30 @@ smart-eyeglasses-kbs/
   sample_images/
     image.png
 
+  templates/
+    base.html
+    index.html
+    questions.html
+    recommendations.html
+    error.html
+
+  static/
+    style.css
+    images/
+    uploads/
+
   README.md
   requirements.txt
   .gitignore
-```
 
-This project includes a Flask-based local web interface. It can be run locally using Python. It is not deployed on GitHub Pages because GitHub Pages does not run Python/Flask applications.
+
+كذلك `requirements.txt` ممتاز وفيه `mediapipe==0.10.14` وهذا جيد لأنك ثبتت نسخة متوافقة مع مشروعك. :contentReference[oaicite:3]{index=3}
+
+بعد تعديل README محليًا، ارفع التعديل:
+
+```powershell
+cd C:\Users\ASUS\Desktop\smart-eyeglasses-kbs
+
+git add README.md
+git commit -m "Improve project README"
+git push
