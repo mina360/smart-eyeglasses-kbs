@@ -1,5 +1,3 @@
-# smart-eyeglasses-kbs
-
 # Smart Eyeglasses Recommendation KBS
 
 A Knowledge-Based System for recommending suitable eyeglass frames based on face shape, face dimensions, user preferences, and rule-based reasoning.
