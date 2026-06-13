@@ -1,0 +1,300 @@
+/* General Body & Container */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+    direction: rtl; /* Right-to-left for Arabic */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Headings */
+h1 {
+    color: #007bff;
+    margin-bottom: 15px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 1.6em;
+}
+
+/* Forms and Question Groups */
+form {
+    margin-top: 30px;
+}
+
+.question-group {
+    text-align: right;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.question-group:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.group-label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    color: #0056b3;
+    font-weight: 600;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between radio options */
+}
+
+.options label {
+    display: block;
+    background: #f8f9fa;
+    padding: 18px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #ced4da;
+    font-size: 1.1em;
+    color: #495057;
+    text-align: right;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    font-weight: normal; /* Override default label bold */
+}
+
+.options label:hover {
+    background: #e9f2ff;
+    border-color: #007bff;
+}
+
+.options input[type="radio"] {
+    display: none;
+}
+
+.options input[type="radio"]:checked + label {
+    background: #e0efff;
+    border-color: #007bff;
+    color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0,123,255,0.2);
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    max-width: 300px; /* Limit button width */
+    margin-top: 30px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn.primary {
+    background: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+}
+
+.btn.primary:hover {
+    background: #0056b3;
+}
+
+.btn.secondary {
+    background: #6c757d;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(108,117,125,0.3);
+}
+
+.btn.secondary:hover {
+    background: #5a6268;
+}
+
+/* Face Info Display */
+.face-info {
+    background-color: #e9f2ff;
+    border: 1px solid #b3d7ff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    text-align: right;
+    font-size: 1.1em;
+    color: #0056b3;
+    font-weight: 500;
+}
+.face-info p {
+    margin: 5px 0;
+}
+
+/* Result Cards for Recommendations */
+.result-card {
+    text-align: right;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    display: flex; /* For image and details layout */
+    flex-direction: row-reverse; /* Puts image on the right in RTL */
+    align-items: flex-start; /* Aligns content to the top */
+    gap: 20px;
+}
+
+.result-card h3 {
+    color: #007bff;
+    border-bottom: 2px solid #e0efff;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.frame-image {
+    flex-shrink: 0; /* Prevents image from shrinking */
+    width: 180px; /* Fixed width for image container */
+    height: 120px; /* Fixed height */
+    background-color: #f0f0f0; /* Placeholder background */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow if image is larger */
+    border: 1px solid #ddd;
+}
+
+.frame-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures image fits without cropping */
+    display: block;
+}
+
+/* Placeholder for missing images */
+.frame-image img[src*="placeholder.png"] {
+    /* Style for the placeholder image if desired */
+    opacity: 0.7;
+}
+
+
+.result-details {
+    flex-grow: 1; /* Allows details to take remaining space */
+}
+
+.result-details p {
+    margin: 8px 0;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.result-details span {
+    font-weight: bold;
+    color: #333;
+    margin-left: 8px; /* Space between label and value */
+}
+
+.reasons-list, .confidence-breakdown {
+    background: #f0f7ff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #495057;
+    margin-top: 15px;
+    border: 1px solid #cfe2ff;
+    font-size: 0.95em;
+    text-align: right;
+}
+
+/* Risk Level Styling */
+.risk-low { color: #28a745; font-weight: bold; }
+.risk-medium { color: #ffc107; font-weight: bold; }
+.risk-high { color: #dc3545; font-weight: bold; }
+
+/* No Results Message */
+.no-results-message {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 40px;
+    color: #856404;
+}
+.no-results-message h2 {
+    color: #856404;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.no-results-message p {
+    font-size: 1.1em;
+    margin-bottom: 0;
+}
+
+/* Summary text */
+.summary {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+        max-width: none;
+    }
+    .result-card {
+        flex-direction: column; /* Stack image and details on small screens */
+        align-items: center;
+    }
+    .frame-image {
+        width: 150px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+    .result-card h3 {
+        font-size: 1.5em;
+    }
+}

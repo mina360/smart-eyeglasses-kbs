@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>أخبرنا المزيد من التفاصيل</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Styles for sub-questions groups */
+        .sub-questions { 
+            display: none;
+            border-left: 3px solid #007bff;
+            padding-left: 20px;
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+        .path-questions { display: none; } /* Initially hide all path questions */
+        .group-label {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>أخبرنا بالمزيد من التفاصيل</h1>
+    <h2>شكل وجهك: {{ face_shape }}، عرض وجهك: {{ face_width }} سم</h2>
+    <form action="/results" method="post">
+        <input type="hidden" name="gender" value="{{ gender }}">
+        <input type="hidden" name="path" value="{{ path }}">
+        <input type="hidden" name="face_shape" value="{{ face_shape }}">
+        <input type="hidden" name="face_width" value="{{ face_width }}">
+        
+        <div id="professional_path" class="path-questions">
+            <div class="question-group">
+                <label class="group-label">🎯 ما هي أولويتك في بيئة العمل؟</label>
+                <div class="options">
+                    <input type="radio" id="prof_app" name="professional_priority" value="appearance" onclick="toggleSubQuestions('appearance_sub', 'comfort_sub')"><label for="prof_app">المظهر الذي يعكس الثقة</label>
+                    <input type="radio" id="prof_comf" name="professional_priority" value="comfort" onclick="toggleSubQuestions('comfort_sub', 'appearance_sub')"><label for="prof_comf">الراحة المطلقة لساعات العمل الطويلة</label>
+                </div>
+            </div>
+            <div id="appearance_sub" class="sub-questions">
+                <div class="question-group">
+                    <label class="group-label">✨ ما هو ستايلك المفضل؟</label>
+                    <div class="options">
+                        <input type="radio" id="classic" name="style_preference" value="classic_timeless"><label for="classic">كلاسيكي وأنيق</label>
+                        <input type="radio" id="modern" name="style_preference" value="modern_bold"><label for="modern">حديث وجريء</label>
+                    </div>
+                </div>
+            </div>
+            <div id="comfort_sub" class="sub-questions">
+                <div class="question-group">
+                     <label class="group-label">😌 ما هي أكبر مشكلة راحة تواجهك؟</label>
+                     <div class="options">
+                         <input type="radio" id="slips_nose" name="comfort_issue" value="slips_down"><label for="slips_nose">النظارة تنزلق من على أنفي</label>
+                         <input type="radio" id="heavy_marks" name="comfort_issue" value="lightweight"><label for="heavy_marks">تترك علامات بسبب وزنها الثقيل</label>
+                         <input type="radio" id="side_pressure" name="comfort_issue" value="sits_high"><label for="side_pressure">تضغط على جانبي رأسي</label>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="athletic_path" class="path-questions">
+            <div class="question-group">
+                <label class="group-label">⚡ ما هو مستوى شدة نشاطك؟</label>
+                <div class="options">
+                    <input type="radio" id="high_intensity" name="activity_level" value="high" onclick="toggleSubQuestions('athletic_high_sub', 'athletic_medium_low_sub')"><label for="high_intensity">عالي (رياضات مكثفة، جري، ركوب دراجات)</label>
+                    <input type="radio" id="medium_low_intensity" name="activity_level" value="medium_low" onclick="toggleSubQuestions('athletic_medium_low_sub', 'athletic_high_sub')"><label for="medium_low_intensity">متوسط/منخفض (رياضات عادية، نادي رياضي، مشي)</label>
+                </div>
+            </div>
+            <div id="athletic_high_sub" class="sub-questions">
+                <div class="question-group">
+                    <label class="group-label">🔥 ما هو أكبر هم لديك في الأنشطة عالية الشدة؟</label>
+                    <div class="options">
+                        <input type="radio" id="concern_stability" name="concern" value="stability" onclick="toggleSubQuestions('stability_design_sub')"><label for="concern_stability">النظارة قد تسقط (ثبات)</label>
+                        <input type="radio" id="concern_wind" name="concern" value="wind_vision" onclick="toggleSubQuestions('')"><label for="concern_wind">الرياح تؤثر على رؤيتي</label>
+                    </div>
+                </div>
+                <div id="stability_design_sub" class="sub-questions">
+                    <div class="question-group">
+                        <label class="group-label">🔒 ما هو التصميم المفضل للثبات؟</label>
+                        <div class="options">
+                            <input type="radio" id="wrap_around" name="stability_design" value="wrap_around"><label for="wrap_around">تلتف حول الوجه</label>
+                            <input type="radio" id="rubber_temples" name="stability_design" value="rubber_temples"><label for="rubber_temples">أذرع مطاطية</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="athletic_medium_low_sub" class="sub-questions">
+                <div class="question-group">
+                    <label class="group-label">💪 ما هو الأهم بالنسبة لك (الراحة/المتانة)؟</label>
+                    <div class="options">
+                        <input type="radio" id="lightweight_priority" name="durability_priority" value="lightweight" onclick="toggleSubQuestions('')"><label for="lightweight_priority">أن تكون خفيفة الوزن جداً</label>
+                        <input type="radio" id="durable_priority" name="durability_priority" value="durable" onclick="toggleSubQuestions('durability_type_sub')"><label for="durable_priority">أن تكون متينة بما يكفي</label>
+                    </div>
+                </div>
+                <div id="durability_type_sub" class="sub-questions">
+                    <div class="question-group">
+                        <label class="group-label">🛡️ ما هو نوع المتانة التي تفضلها؟</label>
+                        <div class="options">
+                            <input type="radio" id="flexible_frame" name="durability_type" value="flexible"><label for="flexible_frame">إطار مرن (ينثني دون كسر)</label>
+                            <input type="radio" id="solid_frame" name="durability_type" value="solid"><label for="solid_frame">إطار صلب (مقاوم للصدمات)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="artistic_path" class="path-questions">
+            <div class="question-group">
+                <label class="group-label">🎨 ما الذي يجذبك أولاً في التصميم؟</label>
+                <div class="options">
+                    <input type="radio" id="design_shape" name="design_focus" value="shape" onclick="toggleSubQuestions('artistic_shape_sub', 'artistic_color_sub')"><label for="design_shape">التصميم والشكل</label>
+                    <input type="radio" id="design_color" name="design_focus" value="color" onclick="toggleSubQuestions('artistic_color_sub', 'artistic_shape_sub')"><label for="design_color">اللون والنمط</label>
+                </div>
+            </div>
+            <div id="artistic_shape_sub" class="sub-questions">
+                <div class="question-group">
+                    <label class="group-label">🔷 ما نوع الأشكال التي تفضلها؟</label>
+                    <div class="options">
+                        <input type="radio" id="classic_modern_shape" name="shape_type" value="classic_modern"><label for="classic_modern_shape">كلاسيكي بلمسة عصرية</label>
+                        <input type="radio" id="geometric_shape" name="shape_type" value="geometric"><label for="geometric_shape">هندسي جريء</label>
+                        <input type="radio" id="oversized_shape" name="shape_type" value="oversized"><label for="oversized_shape">ضخم وجذاب</label>
+                    </div>
+                </div>
+            </div>
+            <div id="artistic_color_sub" class="sub-questions">
+                <div class="question-group">
+                    <label class="group-label">🌈 ما عائلة الألوان التي تفضلها؟</label>
+                    <div class="options">
+                        <input type="radio" id="rich_classics_color" name="color_family" value="rich_classic"><label for="rich_classics_color">كلاسيكيات غنية</label>
+                        <input type="radio" id="vibrant_bold_color" name="color_family" value="vibrant_bold"><label for="vibrant_bold_color">نابضة بالحياة وجريئة</label>
+                        <input type="radio" id="transparent_color" name="color_family" value="transparent_crystal"><label for="transparent_color">شفافة/كريستالية</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">اعرض توصياتي!</button>
+    </form>
+</div>
+
+<script>
+    function showPathQuestions() {
+        const path = "{{ path }}"; // Get path from Flask context
+        const pathDiv = document.getElementById(path + '_path');
+        if (pathDiv) {
+            pathDiv.style.display = 'block';
+            // Make initial radio buttons for the selected path required
+            // For nested radio groups, manage required attribute with toggleSubQuestions
+            const initialRadioGroup = pathDiv.querySelector('.question-group .options input[type="radio"]');
+            if (initialRadioGroup) {
+                initialRadioGroup.closest('.options').querySelectorAll('input[type="radio"]').forEach(input => input.required = true);
+            }
+        }
+    }
+
+    function toggleSubQuestions(toShowId, toHideId = null) {
+        // Hide all current sub-questions and remove required
+        document.querySelectorAll('.sub-questions').forEach(div => {
+            div.style.display = 'none';
+            div.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.required = false;
+                input.checked = false; // Uncheck hidden inputs
+            });
+        });
+
+        // Show the selected sub-question group and make its radios required
+        if (toShowId) {
+            const divToShow = document.getElementById(toShowId);
+            if (divToShow) {
+                divToShow.style.display = 'block';
+                divToShow.querySelectorAll('input[type="radio"]').forEach(input => input.required = true);
+            }
+        }
+    }
+
+    // Call the function when the page loads
+    window.onload = showPathQuestions;
+</script>
+</body>
+</html>

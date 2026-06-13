@@ -1,0 +1,6 @@
+flask
+experta
+pandas
+openpyxl
+opencv-python
+mediapipe==0.10.14

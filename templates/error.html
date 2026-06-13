@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}حدث خطأ في النظام{% endblock %}
+
+{% block extra_head %}
+<style>
+    .traceback {
+        background-color: #2b2b2b;
+        color: #d4d4d4;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: left;
+        direction: ltr; /* Ensure traceback is LTR */
+        white-space: pre-wrap; /* Allows long lines to wrap */
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 0.9em;
+        overflow-x: auto; /* For horizontal scrolling if line is too long */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>❌ عذرًا، حدث خطأ فادح في النظام</h1>
+    <div class="summary">
+        <p>رسالة الخطأ الأساسية:</p>
+        <p><strong>{{ error_message }}</strong></p>
+    </div>
+    
+    <h3>التفاصيل التقنية (Traceback):</h3>
+    <div class="traceback">
+        {{ traceback }}
+    </div>
+    
+    <a href="/" class="btn primary" style="margin-top: 20px;">العودة للصفحة الرئيسية</a>
+{% endblock %}

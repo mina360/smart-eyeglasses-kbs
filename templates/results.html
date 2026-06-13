@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>التوصيات النهائية</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🏆 التوصيات النهائية لك</h1>
+    {% if recommendations %}
+        <h2>وجدنا لك أفضل الخيارات بناءً على تفضيلاتك وتحليل وجهك</h2>
+        {% for rec in recommendations %}
+            <div class="result-card">
+                <h3>{{ loop.index }}. إطار رقم: {{ rec.frame_id }}</h3>
+                <div class="result-details">
+                    <p>
+                        <span>النقاط الأولية:</span> {{ rec.score }} |
+                        <span>🌟 الثقة:</span> {{ "%.1f"|format(rec.confidence_analysis.overall_cf * 100) }}% |
+                        <span>المخاطرة:</span> {{ rec.confidence_analysis.risk_level.upper() }}
+                    </p>
+                    <p>
+                        <span>الشكل:</span> {{ rec.frame_data.shape }} |
+                        <span>المقاس:</span> {{ rec.frame_data.size }} |
+                        <span>الوزن:</span> {{ rec.frame_data.weight }}g
+                    </p>
+                    <p><span>لماذا تم ترشيحها (أسباب النقاط)؟</span></p>
+                    <div class="result-reasons">
+                        {{ rec.reasons|join(', ') }}
+                    </div>
+                    <p><span>تفصيل الثقة:</span></p>
+                    <div class="result-reasons">
+                        Shape(CF:{{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('shape', 0.0)) }}) | 
+                        Size(CF:{{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('size', 0.0)) }}) | 
+                        Comfort(CF:{{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('comfort', 0.0)) }})
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>❌ للأسف، لم نجد أي نظارة تطابق كل تفضيلاتك الدقيقة.</h2>
+        <p>جرب تغيير بعض الخيارات للحصول على نتائج أوسع.</p>
+    {% endif %}
+    <a href="/" style="margin-top: 30px; display: inline-block; font-size: 1.2em;">« البدء من جديد</a>
+</div>
+</body>
+</html>

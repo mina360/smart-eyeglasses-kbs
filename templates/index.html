@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}ابدأ رحلتك - نظام توصية النظارات{% endblock %}
+
+{% block content %}
+    <h1>🎯 مرحبًا بك في نظام توصية النظارات الذكي</h1>
+    <h2>ابدأ بالإجابة على الأسئلة التالية لنجد لك النظارة المثالية</h2>
+    <form action="/questions" method="post" enctype="multipart/form-data">
+        <div class="question-group">
+            <label class="group-label">🌟 أولاً، ما هو استخدامك الأساسي؟</label>
+            <div class="options">
+                <input type="radio" id="path_professional" name="path" value="professional" required><label for="path_professional">بيئة العمل الاحترافية</label>
+                <input type="radio" id="path_athletic" name="path" value="athletic"><label for="path_athletic">الأنشطة الرياضية</label>
+                <input type="radio" id="path_artistic" name="path" value="artistic"><label for="path_artistic">الموضة والتعبير الفني</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <label class="group-label">👤 ما هو جنسك؟</label>
+            <div class="options">
+                <input type="radio" id="gender_men" name="gender" value="men" required><label for="gender_men">رجل</label>
+                <input type="radio" id="gender_women" name="gender" value="women"><label for="gender_women">امرأة</label>
+            </div>
+        </div>
+        <div class="question-group">
+            <label class="group-label">📷 صورة الوجه</label>
+            <p>يمكنك رفع صورة وجه واضحة، أو ترك الحقل فارغًا لاستخدام الصورة التجريبية الموجودة داخل المشروع.</p>
+            <input type="file" name="image" accept="image/png, image/jpeg">
+        </div>
+        <button type="submit" class="btn primary">التالي »</button>
+    </form>
+{% endblock %}

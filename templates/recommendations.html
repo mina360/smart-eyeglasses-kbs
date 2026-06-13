@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}توصيات النظارات لك{% endblock %}
+
+{% block content %}
+    <h1>🏆 التوصيات النهائية لك</h1>
+    {% if recommendations %}
+        <p class="summary">وجدنا لك أفضل الخيارات بناءً على تفضيلاتك وتحليل وجهك.</p>
+        {% for rec in recommendations %}
+            <div class="card result-card">
+                <h3>{{ loop.index }}. إطار رقم: {{ rec.frame_id }}</h3>
+                {# تم حذف قسم الصورة هنا #}
+                <div class="result-details">
+                    <p>
+                        <span>النقاط الأولية:</span> {{ rec.score }} |
+                        <span>🌟 الثقة:</span> {{ "%.1f"|format(rec.confidence_analysis.overall_cf * 100) }}% |
+                        <span>المخاطرة:</span> <span class="risk-{{ rec.confidence_analysis.risk_level.lower() }}">{{ rec.confidence_analysis.risk_level.upper() }}</span>
+                    </p>
+                    <p>
+                        <span>الشكل:</span> {{ rec.frame_data.shape | default('N/A') }} |
+                        <span>المادة:</span> {{ rec.frame_data.material | default('N/A') }} |
+                        <span>المقاس:</span> {{ rec.frame_data.size | default('N/A') }}
+                    </p>
+                    <p>
+                        <span>الوزن:</span> {{ "%.1f"|format(rec.frame_data.weight | default(0.0)) }}g |
+                        <span>اللون:</span> {{ rec.frame_data.color | default('N/A') }}
+                    </p>
+                    <p><span>لماذا تم ترشيحها (أسباب النقاط)؟</span></p>
+                    <div class="reasons-list">
+                        {{ rec.reasons | join(', ') }}
+                    </div>
+                    <p><span>تفصيل الثقة:</span></p>
+                    <div class="confidence-breakdown">
+                        الشكل (CF: {{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('shape', 0.0)) }}) |
+                        المقاس (CF: {{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('size', 0.0)) }}) |
+                        الراحة (CF: {{ "%.2f"|format(rec.confidence_analysis.confidence_breakdown.get('comfort', 0.0)) }})
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-results-message">
+            <h2>❌ للأسف، لم نجد أي نظارة تطابق كل تفضيلاتك الدقيقة.</h2>
+            <p>جرب تغيير بعض الخيارات للحصول على نتائج أوسع.</p>
+        </div>
+    {% endif %}
+    <a href="/" class="btn secondary" style="margin-top: 30px;">« البدء من جديد</a>
+{% endblock %}
