@@ -63,3 +63,5 @@ smart-eyeglasses-kbs/
   requirements.txt
   .gitignore
 ```
+
+This project includes a Flask-based local web interface. It can be run locally using Python. It is not deployed on GitHub Pages because GitHub Pages does not run Python/Flask applications.
